@@ -11,7 +11,8 @@ import TabPane from 'react-bootstrap/TabPane';
 import '../styling/user_landing_page.css';
 import UserProfile from './UserProfile';
 import Receipts from './Receipts';
-import { fetchUser } from '../actions';
+import Categories from './Categories';
+import { fetchUser , fetchCategories } from '../actions';
 
 
 class UserHomePage extends Component {
@@ -23,13 +24,14 @@ class UserHomePage extends Component {
 componentDidMount(){
     console.log('int the CDM')
    this.props.fetchUser(3);
+   this.props.fetchCategories();
 }
 
     render() {
 
         return (
-            <div class="user-homepage-main-wrapper">
-                <div class='header-wrapper'>
+            <div className="user-homepage-main-wrapper">
+                <div className='header-wrapper'>
                     <h2>Welcome to your account: { `${this.props.user.firstName} ${this.props.user.lastName}`}</h2>
                 </div>    
         
@@ -43,6 +45,12 @@ componentDidMount(){
                       <Nav.Item>
                         <Nav.Link eventKey="receipts">Receipts</Nav.Link>
                       </Nav.Item>
+                      <Nav.Item>
+                      <Nav.Link eventKey="categories">Catergories</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                    <Nav.Link eventKey="add_receipt">Add Receipt</Nav.Link>
+                  </Nav.Item>
                     </Nav>
                   </Col>
                 
@@ -58,14 +66,18 @@ componentDidMount(){
                              <Receipts />
                         </Tab.Pane>
 
+                        <Tab.Pane eventKey="categories">
+                              <Categories categories = {this.props.categories} />
+                        </Tab.Pane>
+
+                        <Tab.Pane eventKey="add_receipt">
+                           
+                        </Tab.Pane>
 
                     </Tab.Content>
                   </Col>
                 </Row>
               </Tab.Container>
-
-
-
 
             </div>
         )
@@ -76,9 +88,10 @@ componentDidMount(){
 const mapStateToProps = state => {
     return {
         user: state.user,
+        categories: state.categories,
         isFetchingUserData: false,
     }
 }
 
 
-export default connect(mapStateToProps, {fetchUser})(UserHomePage);
+export default connect(mapStateToProps, {fetchUser , fetchCategories})(UserHomePage);
