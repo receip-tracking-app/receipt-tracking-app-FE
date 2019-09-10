@@ -1,0 +1,23 @@
+.landingpage-main-wrapper{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.hero-content{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-content h1{
+    text-align: center;
+    width:100%;
+}
+
+.hero-content h2{
+    text-align: center;
+    width:100%;
+}
+
+
